@@ -1,69 +1,73 @@
-# Spaceapps2025-celestialcoders-solution
-An AI-powered solution developed for NASA Space Apps Challenge 2025 by Team Celestial Coders — addressing [A World Away: Hunting for Exoplanets with AI]
+# Welcome to your Lovable project
 
+## Project info
 
-🪐 About the Project
+**URL**: https://lovable.dev/projects/387cbc76-f8d0-4643-9b22-1eb0ee78e80f
 
-The Stellar Haven project was created for the 2025 NASA Space Apps Challenge (Advanced Level) — an international hackathon uniting innovators, developers, and scientists to solve challenges inspired by NASA’s open data.
+## How can I edit this code?
 
-Our goal: use Artificial Intelligence and Machine Learning (AI/ML) to identify exoplanets automatically from large NASA datasets such as Kepler, TESS, and the Exoplanet Archive.
+There are several ways of editing your application.
 
-By training a deep learning model on NASA’s open-source data, we aimed to automate the process of exoplanet discovery — accelerating how scientists analyze and classify planets outside our solar system. 🌠
+**Use Lovable**
 
-Challenge Theme
+Simply visit the [Lovable Project](https://lovable.dev/projects/387cbc76-f8d0-4643-9b22-1eb0ee78e80f) and start prompting.
 
-AI/ML for Exoplanet Discovery
-Thousands of exoplanets have been discovered manually from mission data — our challenge was to build an automated system that learns from NASA’s datasets and accurately identifies new exoplanet candidates.
+Changes made via Lovable will be committed automatically to this repo.
 
-Objectives
+**Use your preferred IDE**
 
-Develop an AI/ML model trained on NASA’s exoplanet datasets
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-Automate detection of exoplanet candidates from new data
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-Enable data visualization and interactive exploration of results
+Follow these steps:
 
-Improve data accuracy and reduce false positives in classification
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
 
-Key Features
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
 
-🔭 Deep Learning Models (Random Forest) for classification
+# Step 3: Install the necessary dependencies.
+npm i
 
-🧠 AI-Powered Predictions from light curve and mission data
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
+```
 
-📊 Data Visualization Dashboard for exoplanet analysis
+**Edit a file directly in GitHub**
 
-🌌 Dataset Integration (Kepler, TESS, NASA Archive)
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-⚙️ Modular Codebase for easy scalability and future datasets
+**Use GitHub Codespaces**
 
-💻 How to Run the Project
-# Clone this repository
-git clone https://github.com/<your-username>/stellar-haven.git
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-# Navigate to the project directory
-cd stellar-haven
+## What technologies are used for this project?
 
-# Install dependencies
-pip install -r requirements.txt
+This project is built with:
 
-# Run the application 
-start.bat
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
 
-Visuals & Output
-<img width="932" height="413" alt="image" src="https://github.com/user-attachments/assets/74277b23-c4b3-4f55-8c96-5e7c9d4c0441" />
-<img width="904" height="400" alt="image" src="https://github.com/user-attachments/assets/ad0bba8d-8446-410d-b2fd-ca3fd3b49527" />
-<img width="938" height="337" alt="image" src="https://github.com/user-attachments/assets/e80a9fd7-1741-4d48-80e8-5e2148992c77" />
-<img width="865" height="277" alt="image" src="https://github.com/user-attachments/assets/7e078ec2-28f5-443d-9292-670c000becac" />
-<img width="932" height="378" alt="image" src="https://github.com/user-attachments/assets/c7c4d05a-98da-4e64-ab83-fae9415fcb0d" />
-<img width="929" height="388" alt="image" src="https://github.com/user-attachments/assets/40aab651-f1ae-4c1e-823b-2e6d17531aab" />
-<img width="935" height="398" alt="image" src="https://github.com/user-attachments/assets/6b3f7fa5-f432-48af-9395-bcbd661e85ca" />
+## How can I deploy this project?
 
+Simply open [Lovable](https://lovable.dev/projects/387cbc76-f8d0-4643-9b22-1eb0ee78e80f) and click on Share -> Publish.
 
+## Can I connect a custom domain to my Lovable project?
 
+Yes, you can!
 
+To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-
-
-
-
+Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
