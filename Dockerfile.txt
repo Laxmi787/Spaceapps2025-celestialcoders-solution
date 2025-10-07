@@ -1,12 +1,37 @@
-FROM python:3.11-slim
+# --- Stage 1: build frontend ---
+FROM node:18-alpine AS frontend-build
+WORKDIR /app/frontend
+# copy package files first for caching
+COPY frontend/package*.json ./
+# if you use yarn: COPY frontend/yarn.lock ./
+RUN npm ci --silent
+COPY frontend/ .
+RUN npm run build
 
+# --- Stage 2: runtime with Python 3.11 ---
+FROM python:3.11-slim
 WORKDIR /app
 
-COPY . .
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
+# Install system deps needed for many pip packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential gcc libpq-dev ca-certificates git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install
+COPY requirements.txt .
 RUN pip install --upgrade pip setuptools wheel
 RUN pip install -r requirements.txt
 
-EXPOSE 10000
+# Copy application code and models
+COPY . .
 
-CMD ["python", "app.py"]
+# Copy built frontend from stage1
+COPY --from=frontend-build /app/frontend/dist ./dist
+
+EXPOSE 8080
+
+# Use waitress to serve the Flask app (reads PORT from env)
+CMD ["waitress-serve", "--port=8080", "app:app"]
