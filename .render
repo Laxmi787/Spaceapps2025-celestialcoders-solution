@@ -1,9 +1,18 @@
-[build]
-command = "pip install -r requirements.txt"
-
-[start]
-command = "python app.py"
-
-
-
-
+services:
+  - type: web
+    name: exoplanet-app
+    env: python
+    rootDir: .  # root of your repo
+    buildCommand: |
+      # Build the React frontend
+      cd frontend && npm install && npm run build
+      # Move build output to backend
+      mv dist ../backend/dist
+      # Install Python dependencies
+      cd ../backend && pip install -r requirements.txt
+    startCommand: cd backend && gunicorn app:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10
+      - key: NODE_VERSION
+        value: 20
