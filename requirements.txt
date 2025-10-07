@@ -13,7 +13,9 @@ gunicorn
 numpy
 pandas
 scikit-learn
+xgboost
 joblib
+
 
 
 
