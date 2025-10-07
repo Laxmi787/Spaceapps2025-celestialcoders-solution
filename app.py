@@ -10,8 +10,8 @@ app = Flask(__name__, static_folder=static_folder_path, static_url_path='')
 # Load ML model and scaler
 # Using a try-except block here is good practice in case files are missing
 try:
-    model_path = os.path.join(os.path.dirname(__file__), 'exoplanet_model.pkl')
-    scaler_path = os.path.join(os.path.dirname(__file__), 'scaler.pkl')
+    model_path = os.path.join(os.path.dirname(__file__), 'exoplanet_model3.pkl')
+    scaler_path = os.path.join(os.path.dirname(__file__), 'scaler3.pkl')
 
     with open(model_path, 'rb') as f:
         model = pickle.load(f)
@@ -70,3 +70,4 @@ if __name__ == '__main__':
     # Using port from environment variable is good practice, with a default
     port = int(os.environ.get('PORT', 8080))
     app.run(host='0.0.0.0', port=port)
+
