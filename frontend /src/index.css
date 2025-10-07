@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Deep space theme - cosmic colors */
+    --background: 229 47% 8%;
+    --foreground: 210 100% 95%;
+
+    --card: 229 40% 12%;
+    --card-foreground: 210 100% 95%;
+
+    --popover: 229 45% 10%;
+    --popover-foreground: 210 100% 95%;
+
+    /* Cosmic cyan primary */
+    --primary: 191 100% 50%;
+    --primary-foreground: 229 47% 8%;
+    --primary-glow: 191 100% 60%;
+
+    /* Purple nebula secondary */
+    --secondary: 265 60% 45%;
+    --secondary-foreground: 210 100% 95%;
+
+    --muted: 229 30% 18%;
+    --muted-foreground: 210 20% 65%;
+
+    /* Purple accent */
+    --accent: 265 80% 60%;
+    --accent-foreground: 210 100% 95%;
+
+    /* Red for false positive */
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 210 100% 95%;
+
+    /* Success green for confirmed */
+    --success: 142 76% 45%;
+    --success-foreground: 210 100% 95%;
+
+    /* Warning yellow for candidate */
+    --warning: 45 93% 58%;
+    --warning-foreground: 229 47% 8%;
+
+    --border: 229 30% 20%;
+    --input: 229 35% 15%;
+    --ring: 191 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Gradients */
+    --gradient-cosmic: linear-gradient(135deg, hsl(229, 47%, 8%), hsl(265, 60%, 15%));
+    --gradient-nebula: linear-gradient(135deg, hsl(265, 80%, 40%), hsl(191, 100%, 40%));
+    --gradient-glow: radial-gradient(circle at center, hsl(191, 100%, 50% / 0.2), transparent);
+
+    /* Shadows and glows */
+    --shadow-cosmic: 0 10px 40px -10px hsl(191, 100%, 50% / 0.3);
+    --shadow-glow: 0 0 30px hsl(191, 100%, 60% / 0.4);
+    --shadow-card: 0 8px 32px hsl(229, 47%, 4% / 0.6);
+  }
+}
+
+/* Starfield animation */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.4); }
+  50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.8); }
+}
+
+@keyframes slide-up {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
