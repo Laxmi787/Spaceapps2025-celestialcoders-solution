@@ -4,16 +4,17 @@ wheel>=0.41.2
 pip>=25.0
 
 # Flask server
-Flask==2.3.3
-Flask-Cors==4.0.0
-waitress==2.1.2
+Flask
+Flask-Cors
+waitress
 gunicorn 
 
 # ML and data stack
 numpy
 pandas
-scikit-learn==1.3.2
-joblib==1.3.2
+scikit-learn
+joblib
+
 
 
 
