@@ -15,4 +15,9 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    // 👇 IMPORTANT: send built files into backend/dist for Flask
+    outDir: "../backend/dist",
+    emptyOutDir: true,
+  },
 }));
