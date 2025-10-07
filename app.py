@@ -1,33 +1,37 @@
 from flask import Flask, request, jsonify, send_from_directory
 import os
-import pickle
 import numpy as np
-import xgboost as xgb  # ✅ for XGBoost models
+import joblib   # safer for sklearn models
 
-# Path to your React build folder
+# Path for React build folder
 static_folder_path = os.path.join(os.path.dirname(__file__), 'dist')
 app = Flask(__name__, static_folder=static_folder_path, static_url_path='')
 
-# --- Load model and scaler safely ---
+# --- Load ML model and scaler safely ---
 try:
     model_path = os.path.join(os.path.dirname(__file__), 'exoplanet_model3.pkl')
     scaler_path = os.path.join(os.path.dirname(__file__), 'scaler3.pkl')
 
-    with open(model_path, 'rb') as f:
-        model = pickle.load(f)
+    model = joblib.load(model_path)
+    scaler = joblib.load(scaler_path)
 
-    with open(scaler_path, 'rb') as f:
-        scaler = pickle.load(f)
-
-    app.logger.info("✅ Model and Scaler loaded successfully.")
-
+    app.logger.info("✅ Model and scaler loaded successfully!")
 except Exception as e:
     app.logger.error(f"❌ Error loading model files: {e}")
     model = None
     scaler = None
 
 
-# --- Prediction Route ---
+# --- Test route to verify server + model ---
+@app.route('/test', methods=['GET'])
+def test():
+    if model is not None and scaler is not None:
+        return jsonify({"status": "ok", "message": "Model and scaler loaded successfully!"})
+    else:
+        return jsonify({"status": "error", "message": "Model or scaler not loaded."}), 500
+
+
+# --- Prediction endpoint ---
 @app.route('/predict', methods=['POST'])
 def predict():
     if model is None or scaler is None:
@@ -36,27 +40,22 @@ def predict():
     try:
         data = request.get_json()
 
-        # Validate input
+        # Validate input format
         if not data or 'features' not in data or not isinstance(data['features'], list):
             return jsonify({'error': 'Invalid input: "features" key missing or not a list.'}), 400
 
         features = np.array(data['features']).reshape(1, -1)
         scaled_features = scaler.transform(features)
+        prediction = model.predict(scaled_features)[0]
 
-        # Convert to DMatrix (for XGBoost)
-        dmatrix = xgb.DMatrix(scaled_features)
+        return jsonify({'prediction': int(prediction)})
 
-        # Get prediction
-        prediction = model.predict(dmatrix)
-        predicted_class = int(np.round(prediction[0]))
-
-        return jsonify({'prediction': predicted_class})
     except Exception as e:
         app.logger.error(f"Prediction error: {e}")
         return jsonify({'error': 'An unexpected error occurred during prediction.'}), 500
 
 
-# --- Serve the React app (Frontend) ---
+# --- Serve React frontend ---
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
@@ -66,7 +65,7 @@ def serve(path):
         return send_from_directory(static_folder_path, 'index.html')
 
 
-# --- Run Locally (Render uses gunicorn) ---
+# --- Local run block (Render ignores this, used only in local dev) ---
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
     app.run(host='0.0.0.0', port=port)
